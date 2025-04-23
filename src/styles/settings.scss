@@ -21,3 +21,22 @@ html * {
 .v-card {
   border-radius: 10px !important;
 }
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+/* Delay the show */
+.delayed-show {
+  animation-delay: 200ms;
+  animation-fill-mode: both;
+}
+
+/* Or alternatively, you could use transition-delay */
+.delayed-show {
+  transition-delay: 200ms;
+}

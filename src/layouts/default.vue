@@ -15,6 +15,8 @@
         height: 100vh;
         z-index: 1000;
       "
+      @mouseenter="isHovered = true"
+      @mouseleave="isHovered = false"
     >
       <v-list>
         <v-list-item
@@ -51,6 +53,9 @@
       </v-list>
 
       <template v-slot:append>
+        <transition name="fade" class="mb-4 mx-auto">
+          <Button v-if="isHovered" class="upgrade delayed-show">Upgrade</Button>
+        </transition>
         <div class="mb-4">
           <v-list-item
             max-height="100px"
@@ -79,6 +84,7 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
+const isHovered = ref(false);
 
 const navItems = ref([
   {

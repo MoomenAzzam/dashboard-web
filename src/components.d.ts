@@ -10,14 +10,23 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppFooter: typeof import('./components/AppFooter.vue')['default']
     AppHeader: typeof import('./components/ui/AppHeader.vue')['default']
+    Button: typeof import('./components/ui/Button.vue')['default']
+    Cancel: typeof import('./components/ui/svg/Cancel.vue')['default']
+    CustomerCards: typeof import('./components/analytics/CustomerCards.vue')['default']
     DateDropdown: typeof import('./components/ui/DateDropdown.vue')['default']
+    DeleteBtn: typeof import('./components/ui/DeleteBtn.vue')['default']
+    Down: typeof import('./components/ui/svg/Down.vue')['default']
     Dropdown: typeof import('./components/ui/Dropdown.vue')['default']
+    EditBtn: typeof import('./components/ui/EditBtn.vue')['default']
+    EditCustomerForm: typeof import('./components/analytics/EditCustomerForm.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     MainChart: typeof import('./components/dashboard/MainChart.vue')['default']
+    PerformanceChart: typeof import('./components/analytics/PerformanceChart.vue')['default']
     RecentOrdersTable: typeof import('./components/dashboard/RecentOrdersTable.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TopAnalyticsCard: typeof import('./components/dashboard/TopAnalyticsCard.vue')['default']
     TopsellingProducts: typeof import('./components/dashboard/TopsellingProducts.vue')['default']
+    UserProfileCard: typeof import('./components/analytics/UserProfileCard.vue')['default']
   }
 }

@@ -9,7 +9,7 @@
       <v-list-item
         v-for="(product, index) in products"
         :key="index"
-        class="px-4 d-flex"
+        class="px-4 d-flex w-full"
       >
         <div class="d-flex align-center ga-5">
           <v-list-item-avatar size="70">
@@ -40,7 +40,7 @@
             </div>
           </v-list-item-content>
         </div>
-        <v-divider v-if="index < products.length - 1" class="mb-3 mt-5"></v-divider>
+        <v-divider v-if="index < products.length - 1" class="my-6 w-full"></v-divider>
       </v-list-item>
 
       <v-divider
