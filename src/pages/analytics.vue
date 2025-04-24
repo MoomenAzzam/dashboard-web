@@ -46,11 +46,16 @@
             <v-btn color="error" @click="activeView = null">Close</v-btn>
           </v-card-actions>
         </template>
-
         <template v-if="activeView === 'edit'">
           <EditCustomerForm
             :user="selectedUser"
             @save="saveChanges"
+            @cancel="activeView = null"
+          />
+        </template>
+        <template v-if="activeView === 'add'">
+          <CreateCustomerForm
+            @save="saveNewCustomer"
             @cancel="activeView = null"
           />
         </template>
@@ -60,60 +65,27 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import { useCustomerStore } from "@/stores/customer";
 
-const users = ref([
-  {
-    id: 1,
-    name: "John Deo",
-    email: "johndoe2211@gmail.com",
-    phone: "+33757005467",
-    gender: "Male",
-    role: "UI/UX Designer",
-    avatar: "https://cdn.vuetifyjs.com/images/john.jpg",
-    address: "2239 Hog Camp Road Schaumburg",
-  },
-  {
-    id: 2,
-    name: "Shelby Goode",
-    email: "shelbygoode481@gmail.com",
-    phone: "+33757005467",
-    gender: "Female",
-    role: "Frontend Developer",
-    avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-    address: "123 Main Street New York",
-  },
-  {
-    id: 3,
-    name: "Robert Bacins",
-    email: "robertbacins4182@com",
-    phone: "+33757005467",
-    gender: "Male",
-    role: "Backend Developer",
-    avatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-    address: "456 Oak Avenue Chicago",
-  },
-]);
+const customerStore = useCustomerStore();
+const { users, fetchUsers, addUser, updateUser, deleteUser } = customerStore;
 
 const activeView = ref(null);
-const showSidePanel = ref(false);
-const isEditing = ref(false);
 const selectedUser = ref(null);
-const editingUser = ref(null);
 
-const handleAddCustomer = () => {
-  console.log("Add customer clicked");
-};
+onMounted(async () => {
+  await fetchUsers();
+});
 
 const handleEdit = (user) => {
   selectedUser.value = { ...user };
-  editingUser.value = { ...user };
   activeView.value = "edit";
 };
 
-const handleDelete = (user) => {
+const handleDelete = async (user) => {
   if (confirm(`Are you sure you want to delete ${user.name}?`)) {
-    users.value = users.value.filter((u) => u.id !== user.id);
+    await deleteUser(user.id);
     if (selectedUser.value?.id === user.id) {
       activeView.value = null;
     }
@@ -125,11 +97,18 @@ const handleView = (user) => {
   activeView.value = "performance";
 };
 
-const saveChanges = (updatedUser) => {
-  const index = users.value.findIndex((u) => u.id === updatedUser.id);
-  if (index !== -1) {
-    users.value[index] = { ...updatedUser };
-  }
+const saveChanges = async (updatedUser) => {
+  await updateUser(updatedUser);
+  activeView.value = null;
+};
+
+const handleAddCustomer = () => {
+  activeView.value = "add";
+  selectedUser.value = null;
+};
+
+const saveNewCustomer = async (newUser) => {
+  await addUser(newUser);
   activeView.value = null;
 };
 </script>

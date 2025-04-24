@@ -12,6 +12,7 @@ declare module 'vue' {
     AppHeader: typeof import('./components/ui/AppHeader.vue')['default']
     Button: typeof import('./components/ui/Button.vue')['default']
     Cancel: typeof import('./components/ui/svg/Cancel.vue')['default']
+    CreateCustomerForm: typeof import('./components/analytics/CreateCustomerForm.vue')['default']
     CustomerCards: typeof import('./components/analytics/CustomerCards.vue')['default']
     DateDropdown: typeof import('./components/ui/DateDropdown.vue')['default']
     DeleteBtn: typeof import('./components/ui/DeleteBtn.vue')['default']

@@ -30,7 +30,7 @@ button {
   align-items: center; /* Ensure icon and text are vertically aligned */
   gap: 10px;
   transition: background-color 0.3s, box-shadow 0.3s;
-
+  justify-content: center;
   &:hover {
     background-color: rgb(var(--v-theme-custom-purple-hover));
     box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.1);

@@ -40,3 +40,18 @@ html * {
 .delayed-show {
   transition-delay: 200ms;
 }
+.custom-input .v-field {
+  background-color: #f7f7f8 !important; /* Light gray */
+  border-radius: 5px !important; /* Rounded corners */
+  box-shadow: none !important; /* No shadow */
+  border: none !important; /* No border */
+  margin-bottom: 15px;
+}
+.custom-input .v-input__control {
+  min-height: 50px !important; /* Height similar to your image */
+}
+.custom-input input {
+  color: #030229 !important; /* Text color */
+  font-size: 12px !important; /* Adjust as needed */
+  font-family: inherit;
+}
