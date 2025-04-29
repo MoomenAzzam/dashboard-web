@@ -1,36 +1,54 @@
-/**
- * router/index.ts
- *
- * Automatic routes for `./src/pages/*.vue`
- */
+import { createRouter, createWebHistory } from "vue-router";
 
-// Composables
-import { createRouter, createWebHistory } from "vue-router/auto";
-import { setupLayouts } from "virtual:generated-layouts";
-import { routes } from "vue-router/auto-routes";
+// Lazy-load your pages
+const Dashboard = () => import("@/pages/index.vue");
+const Analytics = () => import("@/pages/analytics.vue");
+const Invoice = () => import("@/pages/invoice.vue");
+const Schedule = () => import("@/pages/schedule.vue");
+const Calendar = () => import("@/pages/calendar.vue");
+const Messages = () => import("@/pages/messages.vue");
+const Notification = () => import("@/pages/notification.vue");
+const Settings = () => import("@/pages/settings.vue");
+const Login = () => import("@/pages/login.vue");
+const Register = () => import("@/pages/Register.vue");
+const ResetPassword = () => import("@/pages/ResetPassword.vue");
+
+// Layouts
+const DefaultLayout = () => import("@/layouts/default.vue");
+const BlankLayout = () => import("@/layouts/blank.vue");
+
+const routes = [
+  {
+    path: "/login",
+    component: BlankLayout,
+    children: [
+      {
+        path: "",
+        component: Login,
+      },
+      { path: "/reset-password", component: ResetPassword },
+      { path: "/register", component: Register },
+    ],
+  },
+  {
+    path: "/",
+    component: DefaultLayout,
+    children: [
+      { path: "", component: Dashboard },
+      { path: "analytics", component: Analytics },
+      { path: "invoice", component: Invoice },
+      { path: "schedule", component: Schedule },
+      { path: "calendar", component: Calendar },
+      { path: "messages", component: Messages },
+      { path: "notification", component: Notification },
+      { path: "settings", component: Settings },
+    ],
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: setupLayouts(routes),
-});
-
-// Workaround for https://github.com/vitejs/vite/issues/11804
-router.onError((err, to) => {
-  if (err?.message?.includes?.("Failed to fetch dynamically imported module")) {
-    if (!localStorage.getItem("vuetify:dynamic-reload")) {
-      console.log("Reloading page to fix dynamic import error");
-      localStorage.setItem("vuetify:dynamic-reload", "true");
-      location.assign(to.fullPath);
-    } else {
-      console.error("Dynamic import error, reloading page did not fix it", err);
-    }
-  } else {
-    console.error(err);
-  }
-});
-
-router.isReady().then(() => {
-  localStorage.removeItem("vuetify:dynamic-reload");
+  routes,
 });
 
 export default router;

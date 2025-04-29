@@ -37,6 +37,7 @@
           :value="item.value"
           :to="item.route"
           active-class="active-nav-item"
+          :exact="item.route === '/'"
         >
           <!-- Add v-chip for Messages -->
           <template v-if="item.value === 'messages'" v-slot:append>
@@ -108,13 +109,13 @@ const navItems = ref([
     route: "/invoice",
     messageCount: 0,
   },
-  {
-    icon: "mdi-clock-outline",
-    title: "Schedule",
-    value: "schedule",
-    route: "/schedule",
-    messageCount: 0,
-  },
+  // {
+  //   icon: "mdi-clock-outline",
+  //   title: "Schedule",
+  //   value: "schedule",
+  //   route: "/schedule",
+  //   messageCount: 0,
+  // },
   {
     icon: "mdi-calendar-month",
     title: "Calendar",
@@ -122,27 +123,27 @@ const navItems = ref([
     route: "/calendar",
     messageCount: 0,
   },
-  {
-    icon: "mdi-message-badge",
-    title: "Messages",
-    value: "messages",
-    route: "/messages",
-    messageCount: 5, // Example: 5 unread messages
-  },
-  {
-    icon: "mdi-bell",
-    title: "Notification",
-    value: "notification",
-    route: "/notification",
-    messageCount: 0,
-  },
-  {
-    icon: "mdi-cog",
-    title: "Settings",
-    value: "settings",
-    route: "/settings",
-    messageCount: 0,
-  },
+  // {
+  //   icon: "mdi-message-badge",
+  //   title: "Messages",
+  //   value: "messages",
+  //   route: "/messages",
+  //   messageCount: 5, // Example: 5 unread messages
+  // },
+  // {
+  //   icon: "mdi-bell",
+  //   title: "Notification",
+  //   value: "notification",
+  //   route: "/notification",
+  //   messageCount: 0,
+  // },
+  // {
+  //   icon: "mdi-cog",
+  //   title: "Settings",
+  //   value: "settings",
+  //   route: "/settings",
+  //   messageCount: 0,
+  // },
 ]);
 
 const logout = () => {
